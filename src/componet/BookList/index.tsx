@@ -37,6 +37,7 @@ const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBo
               <td>
                 <img
                   className="transform hover:scale-180 sm:hover:scale-400 hover:translate-x-5 z-2 hover:absolute z-10 transition-all shadow-lg"
+                  width="200"
                   src={book.thumbnail}
                   alt={book.title}
                 />
