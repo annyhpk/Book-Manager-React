@@ -1,7 +1,7 @@
 {
   "name": "myapp",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://annyhpk.github.io/Book-Manager-React",
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.1.1",
@@ -37,7 +37,7 @@
     "backup-start": "react-scripts start",
     "backup-build": "react-scripts build",
     "backup-test": "react-scripts test",
-    "start": "cross-env NODE_ENV=a73e6ad38037d0c246d6a27a4b9808cc craco start",
+    "start": "cross-env NODE_ENV=API_KEY craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject"
