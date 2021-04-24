@@ -8,7 +8,8 @@ import SearchResultModal from '../../componet/SearchResultModal';
 import dayjs from 'dayjs';
 import Pagination from '../../componet/Pagination';
 import getBooksInfo from '../../utils/getBooksInfo';
-import getDummyBooks from '../../utils/getDummyBooks';
+// DEMO Version
+// import getDummyBooks from '../../utils/getDummyBooks';
 
 const MainPage: FC = () => {
   const history = useHistory();
@@ -44,16 +45,7 @@ const MainPage: FC = () => {
       if (searchValue.trim() === '' && !searchValue.trim().length) {
         return null;
       }
-      // getBooksInfo(pageNum, searchValue)
-      //   .then((response) => {
-      //     setShowSearchResultModal(true);
-      //     setSearchResultInfo(response.data.documents);
-      //   })
-      //   .catch((error) => {
-      //     console.dir(error);
-      //   });
-
-      getDummyBooks(pageNum)
+      getBooksInfo(pageNum, searchValue)
         .then((response) => {
           setShowSearchResultModal(true);
           setSearchResultInfo(response.data.documents);
@@ -61,6 +53,16 @@ const MainPage: FC = () => {
         .catch((error) => {
           console.dir(error);
         });
+
+      // DEMO Version
+      // getDummyBooks(pageNum)
+      //   .then((response) => {
+      //     setShowSearchResultModal(true);
+      //     setSearchResultInfo(response.data.documents);
+      //   })
+      //   .catch((error) => {
+      //     console.dir(error);
+      //   });
     },
     [pageNum, searchValue],
   );
