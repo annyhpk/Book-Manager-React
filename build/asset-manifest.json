@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/Book-Manager-React/build/static/css/main.3b0bdafc.chunk.css",
-    "main.js": "/Book-Manager-React/build/static/js/main.c638ecf9.chunk.js",
-    "main.js.map": "/Book-Manager-React/build/static/js/main.c638ecf9.chunk.js.map",
+    "main.js": "/Book-Manager-React/build/static/js/main.1055023f.chunk.js",
+    "main.js.map": "/Book-Manager-React/build/static/js/main.1055023f.chunk.js.map",
     "runtime-main.js": "/Book-Manager-React/build/static/js/runtime-main.a02c26d2.js",
     "runtime-main.js.map": "/Book-Manager-React/build/static/js/runtime-main.a02c26d2.js.map",
     "static/js/2.1b49f154.chunk.js": "/Book-Manager-React/build/static/js/2.1b49f154.chunk.js",
@@ -25,6 +25,6 @@
     "static/js/runtime-main.a02c26d2.js",
     "static/js/2.1b49f154.chunk.js",
     "static/css/main.3b0bdafc.chunk.css",
-    "static/js/main.c638ecf9.chunk.js"
+    "static/js/main.1055023f.chunk.js"
   ]
 }
