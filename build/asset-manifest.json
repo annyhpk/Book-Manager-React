@@ -1,30 +1,30 @@
 {
   "files": {
     "main.css": "/Book-Manager-React/build/static/css/main.3b0bdafc.chunk.css",
-    "main.js": "/Book-Manager-React/build/static/js/main.8f3c84e3.chunk.js",
-    "main.js.map": "/Book-Manager-React/build/static/js/main.8f3c84e3.chunk.js.map",
-    "runtime-main.js": "/Book-Manager-React/build/static/js/runtime-main.1c1edaa1.js",
-    "runtime-main.js.map": "/Book-Manager-React/build/static/js/runtime-main.1c1edaa1.js.map",
-    "static/js/2.c9cc45fd.chunk.js": "/Book-Manager-React/build/static/js/2.c9cc45fd.chunk.js",
-    "static/js/2.c9cc45fd.chunk.js.map": "/Book-Manager-React/build/static/js/2.c9cc45fd.chunk.js.map",
-    "static/js/3.59704f96.chunk.js": "/Book-Manager-React/build/static/js/3.59704f96.chunk.js",
-    "static/js/3.59704f96.chunk.js.map": "/Book-Manager-React/build/static/js/3.59704f96.chunk.js.map",
-    "static/js/4.9302cd9c.chunk.js": "/Book-Manager-React/build/static/js/4.9302cd9c.chunk.js",
-    "static/js/4.9302cd9c.chunk.js.map": "/Book-Manager-React/build/static/js/4.9302cd9c.chunk.js.map",
-    "static/js/5.9693b142.chunk.js": "/Book-Manager-React/build/static/js/5.9693b142.chunk.js",
-    "static/js/5.9693b142.chunk.js.map": "/Book-Manager-React/build/static/js/5.9693b142.chunk.js.map",
+    "main.js": "/Book-Manager-React/build/static/js/main.509df942.chunk.js",
+    "main.js.map": "/Book-Manager-React/build/static/js/main.509df942.chunk.js.map",
+    "runtime-main.js": "/Book-Manager-React/build/static/js/runtime-main.314ebcf0.js",
+    "runtime-main.js.map": "/Book-Manager-React/build/static/js/runtime-main.314ebcf0.js.map",
+    "static/js/2.2254fcfb.chunk.js": "/Book-Manager-React/build/static/js/2.2254fcfb.chunk.js",
+    "static/js/2.2254fcfb.chunk.js.map": "/Book-Manager-React/build/static/js/2.2254fcfb.chunk.js.map",
+    "static/js/3.8b91e0a3.chunk.js": "/Book-Manager-React/build/static/js/3.8b91e0a3.chunk.js",
+    "static/js/3.8b91e0a3.chunk.js.map": "/Book-Manager-React/build/static/js/3.8b91e0a3.chunk.js.map",
+    "static/js/4.577ee6a5.chunk.js": "/Book-Manager-React/build/static/js/4.577ee6a5.chunk.js",
+    "static/js/4.577ee6a5.chunk.js.map": "/Book-Manager-React/build/static/js/4.577ee6a5.chunk.js.map",
+    "static/js/5.dceb0b98.chunk.js": "/Book-Manager-React/build/static/js/5.dceb0b98.chunk.js",
+    "static/js/5.dceb0b98.chunk.js.map": "/Book-Manager-React/build/static/js/5.dceb0b98.chunk.js.map",
     "static/js/6.ffbbe157.chunk.js": "/Book-Manager-React/build/static/js/6.ffbbe157.chunk.js",
     "static/js/6.ffbbe157.chunk.js.map": "/Book-Manager-React/build/static/js/6.ffbbe157.chunk.js.map",
     "static/js/7.c6477676.chunk.js": "/Book-Manager-React/build/static/js/7.c6477676.chunk.js",
     "static/js/7.c6477676.chunk.js.map": "/Book-Manager-React/build/static/js/7.c6477676.chunk.js.map",
     "index.html": "/Book-Manager-React/build/index.html",
     "static/css/main.3b0bdafc.chunk.css.map": "/Book-Manager-React/build/static/css/main.3b0bdafc.chunk.css.map",
-    "static/js/2.c9cc45fd.chunk.js.LICENSE.txt": "/Book-Manager-React/build/static/js/2.c9cc45fd.chunk.js.LICENSE.txt"
+    "static/js/2.2254fcfb.chunk.js.LICENSE.txt": "/Book-Manager-React/build/static/js/2.2254fcfb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1c1edaa1.js",
-    "static/js/2.c9cc45fd.chunk.js",
+    "static/js/runtime-main.314ebcf0.js",
+    "static/js/2.2254fcfb.chunk.js",
     "static/css/main.3b0bdafc.chunk.css",
-    "static/js/main.8f3c84e3.chunk.js"
+    "static/js/main.509df942.chunk.js"
   ]
 }
