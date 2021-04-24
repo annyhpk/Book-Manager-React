@@ -97,11 +97,11 @@ const MainPage: FC = () => {
           </thead>
           {/* 책정보 로드 */}
           <tbody>
-            {pageOfbooksInfo?.map((book) => {
+            {pageOfbooksInfo?.map((book, index) => {
               return (
                 <tr key={book.isbn}>
                   <td>
-                    <b>{`[${book.status}]`}</b> <Link to={`/book/${book.isbn}`}>{book.title}</Link>
+                    <b>{`[${book.status}]`}</b> <Link to={`/book/${index * pageNum}/${book.isbn}`}>{book.title}</Link>
                   </td>
                   <td>{book.authors[0]}</td>
                   <td>{book.amount}</td>

@@ -22,8 +22,8 @@ export const delBook = createAction(DEL_BOOK, function prepare(dataToSubmit: str
   };
 });
 
-export const uptBook = createAction(UPT_BOOK, function prepare(isbn: string, amount: number) {
+export const uptBook = createAction(UPT_BOOK, function prepare(dataToSubmit: [number, number]) {
   return {
-    payload: { isbn, amount },
+    payload: dataToSubmit,
   };
 });

@@ -28,12 +28,8 @@ export default createReducer(inintialState, {
     };
   },
   [UPT_BOOK]: (state, action) => {
-    const target = state.documents.filter((book) => book.isbn === action.payload.isbn);
-    target[0].amount = action.payload.amount;
+    const [id, amount] = action.payload;
 
-    return {
-      ...state,
-      documents: state.documents.concat(action.payload),
-    };
+    return void (state.documents[id].amount = amount);
   },
 });

@@ -11,11 +11,11 @@ import dayjs from 'dayjs';
 const BookInfoPage: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { isbn } = useParams<{ isbn: string }>();
+  const { post, isbn } = useParams<{ post: string; isbn: string }>();
   const bookInfo: BookInfo[] = useAppSelector((state: RootState) => state.book.documents);
   const pageInfo: BookInfo = bookInfo.filter((info) => info.isbn === isbn)[0];
 
-  const [bookAmount, onChangeBookAmount] = useInput(0);
+  const [bookAmount, onChangeBookAmount] = useInput(pageInfo.amount);
 
   // 복사 버튼
   const isbnInput = useRef<HTMLInputElement>(null);
@@ -56,10 +56,12 @@ const BookInfoPage: FC = () => {
 
   const onUpdateAmount = useCallback(
     (e) => {
-      e.preventdefault();
-      dispatch(uptBook(isbn, bookAmount));
+      e.stopPropagation();
+      const postNum = parseInt(post);
+      const data: [number, number] = [postNum, bookAmount];
+      dispatch(uptBook(data));
     },
-    [bookAmount, dispatch, isbn],
+    [bookAmount, dispatch, post],
   );
 
   return (
@@ -326,7 +328,6 @@ const BookInfoPage: FC = () => {
                 <input
                   type="number"
                   className="w-11/12 focus:outline-none focus:text-gray-600 p-2 ml-4"
-                  placeholder={`${pageInfo.amount}`}
                   value={bookAmount}
                   onChange={onChangeBookAmount}
                 />
