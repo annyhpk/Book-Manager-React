@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
 import getBooksInfo from '../../utils/getBooksInfo';
+import getDummyBooks from '../../utils/getDummyBooks';
 import BookList from '../BookList';
 import Modal from '../Modal';
 
@@ -31,7 +32,21 @@ const SearchResultModal: FC<Props> = ({
   const onClickNewPageLoad = useCallback(
     (e) => {
       e.preventDefault();
-      getBooksInfo(page, searchValue)
+      // getBooksInfo(page, searchValue)
+      //   .then((response) => {
+      //     if (setSearchResultInfo !== undefined) {
+      //       setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
+      //       if (response.data.meta.is_end) {
+      //         setIsEndFlag(true);
+      //       }
+      //     }
+      //     setPage((prev) => prev + 1);
+      //   })
+      //   .catch((error) => {
+      //     console.dir(error);
+      //   });
+
+      getDummyBooks(page)
         .then((response) => {
           if (setSearchResultInfo !== undefined) {
             setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
@@ -45,7 +60,7 @@ const SearchResultModal: FC<Props> = ({
           console.dir(error);
         });
     },
-    [page, searchValue, setSearchResultInfo],
+    [page, setSearchResultInfo],
   );
 
   const onSubmitBook = useCallback(

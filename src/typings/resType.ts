@@ -4,7 +4,6 @@ export interface ResType {
     documents: BookInfo[];
   };
 }
-
 export interface BookInfo {
   authors: string[];
   contents: string;
