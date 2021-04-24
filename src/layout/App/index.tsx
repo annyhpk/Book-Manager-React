@@ -9,9 +9,9 @@ const BookInfoPage = loadable(() => import('../../page/BookInfoPage'));
 const App: FC = () => {
   return (
     <Switch>
-      <Redirect exact path="/" to="/books/1" />
-      <Route path="/books/:page" component={MainPage} />
-      <Route path="/book/:post/:isbn" component={BookInfoPage} />
+      <Redirect exact path="/build" to="/build/books/1" />
+      <Route path="/build/books/:page" component={MainPage} />
+      <Route path="/build/book/:post/:isbn" component={BookInfoPage} />
       <Route component={NotFound} />
     </Switch>
   );
