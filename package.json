@@ -1,0 +1,79 @@
+{
+  "name": "myapp",
+  "version": "0.1.0",
+  "homepage": "https://annyhpk.github.io/Book-Manager-React-Version/build/",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.1.1",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.1.5",
+    "@loadable/component": "^5.14.1",
+    "@reduxjs/toolkit": "^1.5.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/loadable__component": "^5.13.3",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.4",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-toastify": "^7.0.3",
+    "redux": "^4.0.5",
+    "redux-promise": "^0.6.0",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "backup-start": "react-scripts start",
+    "backup-build": "react-scripts build",
+    "backup-test": "react-scripts test",
+    "start": "cross-env NODE_ENV=a73e6ad38037d0c246d6a27a4b9808cc craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss7-compat": "^2.0.4",
+    "@types/redux-promise": "^0.5.29",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "autoprefixer": "^9.8.6",
+    "cross-env": "^7.0.3",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-react-redux": "^3.3.2",
+    "postcss": "^7.0.35",
+    "prettier": "2.2.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.4",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
