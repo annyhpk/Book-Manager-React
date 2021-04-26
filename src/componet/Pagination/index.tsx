@@ -30,14 +30,12 @@ const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
 
   // 다음페이지 버튼
   const onClickNext = useCallback(() => {
-    const nextPage = totalPage > currentPage ? currentPage + 1 : currentPage;
-    history.push(`/books/${nextPage}`);
+    totalPage > currentPage ? history.push(`/books/${currentPage + 1}`) : null;
   }, [history, currentPage, totalPage]);
 
   // 이전페이지 버튼
   const onClickPrev = useCallback(() => {
-    const prevPage = currentPage > 0 ? currentPage - 1 : currentPage;
-    history.push(`/books/${prevPage}`);
+    currentPage > 1 ? history.push(`/books/${currentPage - 1}`) : null;
   }, [history, currentPage]);
 
   // 5개의 페이지 그룹을 계산

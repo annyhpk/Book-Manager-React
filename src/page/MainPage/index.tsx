@@ -14,7 +14,7 @@ import getBooksInfo from '../../utils/getBooksInfo';
 const MainPage: FC = () => {
   const history = useHistory();
   const { page } = useParams<{ page: string }>();
-  const pageNum = parseInt(page);
+  const pageNum = useMemo(() => parseInt(page), [page]);
 
   // 현재 페이지 상태 정보
   const [searchValue, onChangeSearch] = useInput<string>('');
@@ -24,9 +24,9 @@ const MainPage: FC = () => {
   // 현재 페이지에 로드할 데이터 범위 계산
   const [firstArticle, endArticle] = useMemo(() => [(pageNum - 1) * 15, 15 * pageNum], [pageNum]);
   const booksInfo: BookInfo[] = useAppSelector((state: RootState) => state.book.documents);
-  const pageOfbooksInfo = booksInfo?.slice(firstArticle, endArticle);
-
-  console.dir(pageOfbooksInfo);
+  const pageOfbooksInfo = useMemo(() => {
+    return booksInfo?.slice(firstArticle, endArticle);
+  }, [booksInfo, endArticle, firstArticle]);
 
   // 페이지당 데이터
   const dataPerPage = 15 as const;
