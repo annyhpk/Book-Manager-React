@@ -8,6 +8,10 @@ import { BookInfo } from '../../typings/resType';
 import useInput from '../../hooks/useInput';
 import dayjs from 'dayjs';
 
+// react-toast
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const BookInfoPage: FC = () => {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -60,6 +64,7 @@ const BookInfoPage: FC = () => {
       const postNum = parseInt(post);
       const data: [number, number] = [postNum, bookAmount];
       dispatch(uptBook(data));
+      toast('변경되었습니다.!');
     },
     [bookAmount, dispatch, post],
   );
@@ -369,6 +374,9 @@ const BookInfoPage: FC = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div>
+        <ToastContainer />
       </div>
     </div>
   );
