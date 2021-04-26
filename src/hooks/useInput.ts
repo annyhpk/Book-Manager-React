@@ -6,7 +6,7 @@ const useInput = <T>(initialData: T): ReturnTypes<T> => {
   const [value, setValue] = useState(initialData);
 
   const handler = useCallback((e) => {
-    setValue(e.target.value);
+    setValue(e.currentTarget.value);
   }, []);
 
   return [value, handler, setValue];
