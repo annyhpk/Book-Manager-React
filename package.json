@@ -2,7 +2,7 @@
   "name": "myapp",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/annyhpk/Book-Manager-React",
+  "homepage": "https://annyhpk.github.io/Book-Manager-React",
   "dependencies": {
     "@craco/craco": "^6.1.1",
     "@emotion/react": "^11.1.5",
