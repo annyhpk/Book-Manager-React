@@ -4,7 +4,7 @@ import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
 import getBooksInfo from '../../utils/getBooksInfo';
 // DEMO Version
-import getDummyBooks from '../../utils/getDummyBooks';
+// import getDummyBooks from '../../utils/getDummyBooks';
 import BookList from '../ModalSearchBookList';
 import Modal from '../Modal';
 
@@ -33,22 +33,7 @@ const SearchResultModal: FC<Props> = ({
   const onClickNewPageLoad = useCallback(
     (e) => {
       e.preventDefault();
-      // getBooksInfo(page, searchValue)
-      //   .then((response) => {
-      //     if (setSearchResultInfo !== undefined) {
-      //       setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
-      //       if (response.data.meta.is_end) {
-      //         setIsEndFlag(true);
-      //       }
-      //     }
-      //     setPage((prev) => prev + 1);
-      //   })
-      //   .catch((error) => {
-      //     console.dir(error);
-      //   });
-
-      // DEMO Version
-      getDummyBooks(page)
+      getBooksInfo(page, searchValue)
         .then((response) => {
           if (setSearchResultInfo !== undefined) {
             setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
@@ -61,8 +46,23 @@ const SearchResultModal: FC<Props> = ({
         .catch((error) => {
           console.dir(error);
         });
+
+      // DEMO Version
+      // getDummyBooks(page)
+      //   .then((response) => {
+      //     if (setSearchResultInfo !== undefined) {
+      //       setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
+      //       if (response.data.meta.is_end) {
+      //         setIsEndFlag(true);
+      //       }
+      //     }
+      //     setPage((prev) => prev + 1);
+      //   })
+      //   .catch((error) => {
+      //     console.dir(error);
+      //   });
     },
-    [page, setSearchResultInfo],
+    [page, searchValue, setSearchResultInfo],
   );
 
   const onSubmitBook = useCallback(
