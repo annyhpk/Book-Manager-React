@@ -1,13 +1,13 @@
 import React, { useCallback, useState, FC, useMemo } from 'react';
-import { useParams, useHistory, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import useInput from '../../hooks/useInput';
 import { RootState } from '../../modules/reducers';
 import { BookInfo } from '../../typings/resType';
 import SearchResultModal from '../../componet/SearchResultModal';
-import dayjs from 'dayjs';
 import Pagination from '../../componet/Pagination';
 import getBooksInfo from '../../utils/getBooksInfo';
+import MainBookList from '../../componet/MainBookList';
 // DEMO Version
 // import getDummyBooks from '../../utils/getDummyBooks';
 
@@ -109,18 +109,7 @@ const MainPage: FC = () => {
           </thead>
           {/* 책정보 로드 */}
           <tbody>
-            {pageOfbooksInfo?.map((book, index) => {
-              return (
-                <tr key={book.isbn}>
-                  <td>
-                    <b>{`[${book.status}]`}</b> <Link to={`/book/${index * pageNum}/${book.isbn}`}>{book.title}</Link>
-                  </td>
-                  <td>{book.authors[0]}</td>
-                  <td>{book.amount}</td>
-                  <td>{dayjs(book.datetime).format('YYYY-MM-DD')}</td>
-                </tr>
-              );
-            })}
+            <MainBookList pageOfbooksInfo={pageOfbooksInfo} pageNum={pageNum} />
           </tbody>
         </table>
       </main>

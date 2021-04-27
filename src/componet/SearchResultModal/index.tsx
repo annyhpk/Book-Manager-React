@@ -5,7 +5,7 @@ import { BookInfo } from '../../typings/resType';
 import getBooksInfo from '../../utils/getBooksInfo';
 // DEMO Version
 // import getDummyBooks from '../../utils/getDummyBooks';
-import BookList from '../BookList';
+import BookList from '../ModalSearchBookList';
 import Modal from '../Modal';
 
 interface Props {
