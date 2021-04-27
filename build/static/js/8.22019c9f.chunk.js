@@ -1,0 +1,2 @@
+(this.webpackJsonpmyapp=this.webpackJsonpmyapp||[]).push([[8],{69:function(t,n,e){"use strict";e.r(n);e(0);var i,s=e(59),a=e(65).a.div(i||(i=Object(s.a)(["\n  width: 100%;\n  height: 100%;\n  text-align: center;\n  font-size: 5rem;\n"]))),c=e(7);n.default=function(){return Object(c.jsxs)(a,{children:["404 ",Object(c.jsx)("br",{})," Page Not Found"]})}}}]);
+//# sourceMappingURL=8.22019c9f.chunk.js.map
