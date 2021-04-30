@@ -27,8 +27,30 @@ react와 redux를 이용하여 도서를 검색하고 추가하여 도서 데이
 
 ### `[실행하기]`
 
-1. 실행: npm run start OR yarn start
-2. 빌드: npm run build OR yarn build
+#### npm 
+
+
+`
+npm run start
+`
+
+
+`
+npm run build
+`
+
+
+#### yarn 
+
+
+`
+yarn start 
+`
+
+
+`
+yarn build
+`
 
 ---
 
