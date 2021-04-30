@@ -28,17 +28,21 @@ react와 redux를 이용하여 도서를 검색하고 추가하여 도서 데이
 ### `[실행하기]`
 
 1. npm: 
+
+
 `
-npm run start 
-
-
+npm run start
+`
+`
 npm run build
 `
 2. yarn: 
+
+
 `
 yarn start 
-
-
+`
+`
 yarn build
 `
 
