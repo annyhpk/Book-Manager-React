@@ -23,10 +23,13 @@ const MainPage: FC = () => {
 
   // 현재 페이지에 로드할 데이터 범위 계산
   const [firstArticle, endArticle] = useMemo(() => [(pageNum - 1) * 15, 15 * pageNum], [pageNum]);
-  const booksInfo: BookInfo[] = useAppSelector((state: RootState) => state.book.documents);
-  const pageOfbooksInfo = useMemo(() => {
-    return booksInfo?.slice(firstArticle, endArticle);
-  }, [booksInfo, endArticle, firstArticle]);
+  const booksInfo = useAppSelector((state: RootState) => {
+    return {
+      booksInfo: state.book.documents.slice(firstArticle, endArticle),
+      length: state.book.documents.length,
+    };
+  });
+  const pageOfbooksInfo = useMemo(() => booksInfo.booksInfo, [booksInfo]);
 
   // 페이지당 데이터
   const dataPerPage = 15 as const;
