@@ -10,7 +10,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 기존 제작하였던 [PHP기반으로 제작하였던 도서관리 웹앱](https://github.com/annyhpk/Book-Manager-WebApp)을 react version으로 리뉴얼한 프로젝트
 
-react와 redux를 이용하여 도서를 검색하고 추가하여 도서 데이터를 관리하는 웹앱입니다.
+react와 redux를 이용하여 도서를 검색하고 추가하여 도서 데이터를 관리하는 SPA 입니다.
 
 ---
 
