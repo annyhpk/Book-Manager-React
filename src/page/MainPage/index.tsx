@@ -1,13 +1,16 @@
 import React, { useCallback, useState, FC, useMemo } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import useInput from '../../hooks/useInput';
-import { RootState } from '../../modules/reducers';
 import { BookInfo } from '../../typings/resType';
-import SearchResultModal from '../../componet/SearchResultModal';
-import Pagination from '../../componet/Pagination';
+import { RootState } from '../../modules/reducers';
+
+import useInput from '../../hooks/useInput';
+import { useAppSelector } from '../../hooks/useAppSelector';
 import getBooksInfo from '../../utils/getBooksInfo';
-import MainBookList from '../../componet/MainBookList';
+
+import loadable from '@loadable/component';
+const SearchResultModal = loadable(() => import('../../componet/SearchResultModal'));
+const Pagination = loadable(() => import('../../componet/Pagination'));
+const MainBookList = loadable(() => import('../../componet/MainBookList'));
 // DEMO Version
 // import getDummyBooks from '../../utils/getDummyBooks';
 
