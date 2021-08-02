@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useRef } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { delBook, uptBook } from '../../modules/actions/book.action';
 import { useParams, useHistory } from 'react-router-dom';
@@ -22,12 +22,18 @@ const BookInfoPage: FC = () => {
   const [bookAmount, onChangeBookAmount] = useInput(pageInfo.amount);
 
   // 복사 버튼
-  const isbnInput = useRef<HTMLInputElement>(null);
-  const copy = useCallback(() => {
-    const el = isbnInput.current;
-    el?.select();
-    document.execCommand('copy');
-  }, []);
+  const copyISBN = useCallback(() => {
+    const text = pageInfo.isbn;
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        console.log('Copying to clipboard was successful!');
+        toast('ISBN 복사 완료!');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [pageInfo.isbn]);
 
   // bookData {
   //   authors: string[];
@@ -174,20 +180,14 @@ const BookInfoPage: FC = () => {
                     />
                   </svg>
                 </div>
-                <input
-                  type="text"
-                  className="w-11/12 text-gray-400 bg-gray-50 p-2"
-                  value={pageInfo.isbn}
-                  ref={isbnInput}
-                  readOnly
-                />
+                <input type="text" className="w-11/12 text-gray-400 bg-gray-50 p-2" value={pageInfo.isbn} readOnly />
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="w-8 text-gray-400 pr-2 bg-gray-50"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  onClick={copy}
+                  onClick={copyISBN}
                 >
                   <path
                     strokeLinecap="round"
