@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useMemo, memo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   currentPage: number;
@@ -7,36 +7,36 @@ interface Props {
 }
 
 const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // 페이지 버튼을 누르면 해당페이지로 이동
   const onClickRedirect = useCallback(
     (e) => {
       e.preventDefault();
-      history.push(`/books/${e.target.value}`);
+      navigate(`/books/${e.target.value}`);
     },
-    [history],
+    [navigate],
   );
 
   // 처음으로 가기 버튼
   const onClickFirst = useCallback(() => {
-    history.push('/books/1');
-  }, [history]);
+    navigate('/books/1');
+  }, [navigate]);
 
   // 마지막으로 가기 버튼
   const onClickLast = useCallback(() => {
-    history.push(`/books/${totalPage}`);
-  }, [history, totalPage]);
+    navigate(`/books/${totalPage}`);
+  }, [navigate, totalPage]);
 
   // 다음페이지 버튼
   const onClickNext = useCallback(() => {
-    totalPage > currentPage ? history.push(`/books/${currentPage + 1}`) : null;
-  }, [history, currentPage, totalPage]);
+    totalPage > currentPage ? navigate(`/books/${currentPage + 1}`) : null;
+  }, [navigate, currentPage, totalPage]);
 
   // 이전페이지 버튼
   const onClickPrev = useCallback(() => {
-    currentPage > 1 ? history.push(`/books/${currentPage - 1}`) : null;
-  }, [history, currentPage]);
+    currentPage > 1 ? navigate(`/books/${currentPage - 1}`) : null;
+  }, [navigate, currentPage]);
 
   // 5개의 페이지 그룹을 계산
   const calculatePages: number[] = useMemo(() => {
