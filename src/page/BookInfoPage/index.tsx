@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { delBook, uptBook } from '../../modules/actions/book.action';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { RootState } from '../../modules/reducers';
 import { BookInfo } from '../../typings/resType';
@@ -13,7 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BookInfoPage: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { post, isbn } = useParams<{ post: string; isbn: string }>();
   const bookInfo: BookInfo[] = useAppSelector((state: RootState) => state.book.documents);
@@ -52,28 +52,41 @@ const BookInfoPage: FC = () => {
   // }
 
   const onClickHome = useCallback(() => {
-    history.push('/');
-  }, [history]);
+    navigate('/');
+  }, [navigate]);
 
   const onClickDelBook = useCallback(
     (e) => {
-      e.stopPropagation();
-      dispatch(delBook(isbn));
-      history.push('/');
+      if (isbn) {
+        e.stopPropagation();
+        dispatch(delBook(isbn));
+        navigate('/');
+      } else {
+        wrongApproachAlert();
+      }
     },
-    [dispatch, history, isbn],
+    [dispatch, navigate, isbn],
   );
 
   const onUpdateAmount = useCallback(
     (e) => {
       e.stopPropagation();
-      const postNum = parseInt(post);
-      const data: [number, number] = [postNum, bookAmount];
-      dispatch(uptBook(data));
-      toast('변경되었습니다.!');
+      if (post) {
+        const postNum = parseInt(post);
+        const data: [number, number] = [postNum, bookAmount];
+        dispatch(uptBook(data));
+        toast('변경되었습니다.!');
+      } else {
+        wrongApproachAlert();
+      }
     },
     [bookAmount, dispatch, post],
   );
+
+  const wrongApproachAlert = useCallback(() => {
+    alert('잘못된 접근입니다.');
+    navigate('/');
+  }, []);
 
   return (
     <div className="container pt-8 mx-auto md:pt-12">

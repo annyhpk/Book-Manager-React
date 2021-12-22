@@ -1,5 +1,5 @@
 import React, { useCallback, useState, FC, useMemo } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
 
@@ -8,16 +8,16 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import getBooksInfo from '../../utils/getBooksInfo';
 
 import loadable from '@loadable/component';
-const SearchResultModal = loadable(() => import('../../componet/SearchResultModal'));
-const Pagination = loadable(() => import('../../componet/Pagination'));
-const MainBookList = loadable(() => import('../../componet/MainBookList'));
+const SearchResultModal = loadable(() => import('../../components/SearchResultModal'));
+const Pagination = loadable(() => import('../../components/Pagination'));
+const MainBookList = loadable(() => import('../../components/MainBookList'));
 // DEMO Version
 // import getDummyBooks from '../../utils/getDummyBooks';
 
 const MainPage: FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { page } = useParams<{ page: string }>();
-  const pageNum = useMemo(() => parseInt(page), [page]);
+  const pageNum = useMemo(() => parseInt(page || '1'), [page]);
 
   // 현재 페이지 상태 정보
   const [searchValue, onChangeSearch] = useInput<string>('');
@@ -74,7 +74,7 @@ const MainPage: FC = () => {
   );
 
   if (isNaN(pageNum) || !pageNum || pageNum > totalPage) {
-    history.push('/notFound');
+    navigate('/notFound');
   }
 
   return (
