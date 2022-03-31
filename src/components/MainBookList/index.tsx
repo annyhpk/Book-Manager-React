@@ -4,15 +4,15 @@ import { Link } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 
 type Props = {
-  pageOfbooksInfo: BookInfo[];
+  pageOfBooksInfo: BookInfo[];
   pageNum: number;
 };
 
-const MainBookList: FC<Props> = ({ pageOfbooksInfo, pageNum }: Props) => {
+const MainBookList: FC<Props> = ({ pageOfBooksInfo, pageNum }: Props) => {
   return (
     <>
-      {pageOfbooksInfo !== undefined &&
-        pageOfbooksInfo?.map((book: BookInfo, index: number) => (
+      {pageOfBooksInfo !== undefined &&
+        pageOfBooksInfo?.map((book: BookInfo, index: number) => (
           <tr key={book.isbn}>
             <td>
               <b>{`[${book.status}]`}</b> <Link to={`/book/${index * pageNum}/${book.isbn}`}>{book.title}</Link>

@@ -8,6 +8,7 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import getBooksInfo from '../../utils/getBooksInfo';
 
 import loadable from '@loadable/component';
+
 const SearchResultModal = loadable(() => import('../../components/SearchResultModal'));
 const Pagination = loadable(() => import('../../components/Pagination'));
 const MainBookList = loadable(() => import('../../components/MainBookList'));
@@ -32,7 +33,7 @@ const MainPage: FC = () => {
       length: state.book.documents.length,
     };
   });
-  const pageOfbooksInfo = useMemo(() => booksInfo.booksInfo, [booksInfo]);
+  const pageOfBooksInfo = useMemo(() => booksInfo.booksInfo, [booksInfo]);
 
   // 페이지당 데이터
   const dataPerPage = 15 as const;
@@ -57,18 +58,9 @@ const MainPage: FC = () => {
           setSearchResultInfo(response.data.documents);
         })
         .catch((error) => {
-          console.dir(error);
+          console.log(...error);
+          alert(`에러코드[${error.response?.status}] \n통신에 문제가 발생하였습니다.`);
         });
-
-      // DEMO Version
-      // getDummyBooks(pageNum)
-      //   .then((response) => {
-      //     setShowSearchResultModal(true);
-      //     setSearchResultInfo(response.data.documents);
-      //   })
-      //   .catch((error) => {
-      //     console.dir(error);
-      //   });
     },
     [pageNum, searchValue],
   );
@@ -115,7 +107,7 @@ const MainPage: FC = () => {
           </thead>
           {/* 책정보 로드 */}
           <tbody>
-            <MainBookList pageOfbooksInfo={pageOfbooksInfo} pageNum={pageNum} />
+            <MainBookList pageOfBooksInfo={pageOfBooksInfo} pageNum={pageNum} />
           </tbody>
         </table>
       </main>

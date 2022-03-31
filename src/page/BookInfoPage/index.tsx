@@ -55,6 +55,11 @@ const BookInfoPage: FC = () => {
     navigate('/');
   }, [navigate]);
 
+  const wrongApproachAlert = useCallback(() => {
+    alert('잘못된 접근입니다.');
+    navigate('/');
+  }, [navigate]);
+
   const onClickDelBook = useCallback(
     (e) => {
       if (isbn) {
@@ -65,7 +70,7 @@ const BookInfoPage: FC = () => {
         wrongApproachAlert();
       }
     },
-    [dispatch, navigate, isbn],
+    [isbn, dispatch, navigate, wrongApproachAlert],
   );
 
   const onUpdateAmount = useCallback(
@@ -80,13 +85,8 @@ const BookInfoPage: FC = () => {
         wrongApproachAlert();
       }
     },
-    [bookAmount, dispatch, post],
+    [bookAmount, dispatch, post, wrongApproachAlert],
   );
-
-  const wrongApproachAlert = useCallback(() => {
-    alert('잘못된 접근입니다.');
-    navigate('/');
-  }, []);
 
   return (
     <div className="container pt-8 mx-auto md:pt-12">
