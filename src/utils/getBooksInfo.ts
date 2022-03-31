@@ -6,7 +6,7 @@ const getBooksInfo = async (page: number, value: string): Promise<ResType> => {
     `https://dapi.kakao.com/v3/search/book?target=title&sort=accuracy&page=${page}&size=10&query=${value}`,
   );
   return await axios.get(baseURL, {
-    headers: { Authorization: `KakaoAK ${process.env.NODE_ENV}` },
+    headers: { Authorization: `KakaoAK ${process.env.REACT_APP_KAKAO_API}` },
   });
 };
 
