@@ -1,10 +1,9 @@
 import React, { FC } from 'react';
 import { Route, Routes, Navigate } from 'react-router';
-import loadable from '@loadable/component';
 
-const NotFound = loadable(() => import('../../page/NotFound'));
-const MainPage = loadable(() => import('../../page/MainPage'));
-const BookInfoPage = loadable(() => import('../../page/BookInfoPage'));
+const NotFound = React.lazy(() => import('../../page/NotFound'));
+const MainPage = React.lazy(() => import('../../page/MainPage'));
+const BookInfoPage = React.lazy(() => import('../../page/BookInfoPage'));
 
 const App: FC = () => {
   return (

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC, useMemo } from 'react';
+import React, { useCallback, useState, FC, useMemo, Suspense } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
@@ -6,14 +6,11 @@ import { RootState } from '../../modules/reducers';
 import useInput from '../../hooks/useInput';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import getBooksInfo from '../../utils/getBooksInfo';
+import Spinner from '../../components/Spinner';
 
-import loadable from '@loadable/component';
-
-const SearchResultModal = loadable(() => import('../../components/SearchResultModal'));
-const Pagination = loadable(() => import('../../components/Pagination'));
-const MainBookList = loadable(() => import('../../components/MainBookList'));
-// DEMO Version
-// import getDummyBooks from '../../utils/getDummyBooks';
+const SearchResultModal = React.lazy(() => import('../../components/SearchResultModal'));
+const Pagination = React.lazy(() => import('../../components/Pagination'));
+const MainBookList = React.lazy(() => import('../../components/MainBookList'));
 
 const MainPage: FC = () => {
   const navigate = useNavigate();
@@ -57,9 +54,20 @@ const MainPage: FC = () => {
           setShowSearchResultModal(true);
           setSearchResultInfo(response.data.documents);
         })
-        .catch((error) => {
-          console.log(...error);
-          alert(`에러코드[${error.response?.status}] \n통신에 문제가 발생하였습니다.`);
+        .catch((reason) => {
+          if (reason.response) {
+            // 요청이 전송되었고, 서버는 2xx 외의 상태 코드로 응답했습니다.
+            console.log(reason.response.data);
+            console.log(reason.response.status);
+            console.log(reason.response.headers);
+          } else if (reason.request) {
+            // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
+            console.log(reason.request);
+          } else {
+            // 오류가 발생한 요청을 설정하는 동안 문제가 발생했습니다.
+            console.log('Error', reason.message);
+          }
+          alert(`죄송합니다. 통신에 문제가 발생하였습니다.`);
         });
     },
     [pageNum, searchValue],
@@ -115,14 +123,16 @@ const MainPage: FC = () => {
       <Pagination currentPage={pageNum} totalPage={totalPage} />
 
       {/* 책 검색 결과 모달창 */}
-      <SearchResultModal
-        show={showSearchResultModal}
-        onCloseModal={onCloseModal}
-        setShowSearchResultModal={setShowSearchResultModal}
-        searchResultInfo={searchResultInfo}
-        setSearchResultInfo={setSearchResultInfo}
-        searchValue={searchValue}
-      />
+      <Suspense fallback={<Spinner></Spinner>}>
+        <SearchResultModal
+          show={showSearchResultModal}
+          onCloseModal={onCloseModal}
+          setShowSearchResultModal={setShowSearchResultModal}
+          searchResultInfo={searchResultInfo}
+          setSearchResultInfo={setSearchResultInfo}
+          searchValue={searchValue}
+        />
+      </Suspense>
     </div>
   );
 };
