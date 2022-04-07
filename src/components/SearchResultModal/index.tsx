@@ -4,9 +4,8 @@ import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
 import getBooksInfo from '../../utils/getBooksInfo';
 
-import BookList from '../ModalSearchBookList';
-import Modal from '../Modal';
-
+const BookList = React.lazy(() => import('../ModalSearchBookList'));
+const Modal = React.lazy(() => import('../Modal'));
 interface Props {
   show: boolean;
   onCloseModal: () => void;
