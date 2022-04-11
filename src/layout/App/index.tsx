@@ -13,7 +13,7 @@ const App: FC = () => {
         <Route path="/" element={<Navigate replace to="/books/1" />} />
         <Route path="/books/:page" element={<MainPage />} />
         <Route path="/book/:post/:isbn" element={<BookInfoPage />} />
-        <Route element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Suspense>
   );
