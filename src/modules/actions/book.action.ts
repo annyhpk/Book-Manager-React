@@ -16,7 +16,7 @@ export const addBook = createAction(ADD_BOOK, function prepare(dataToSubmit: Boo
   };
 });
 
-export const delBook = createAction(DEL_BOOK, function prepare(dataToSubmit: string) {
+export const delBook = createAction(DEL_BOOK, function prepare(dataToSubmit: number) {
   return {
     payload: dataToSubmit,
   };

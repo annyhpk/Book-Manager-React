@@ -20,6 +20,10 @@ export interface BookInfo {
   amount: number;
 }
 
+export interface BookState {
+  [isbn: number]: BookInfo;
+}
+
 interface Meta {
   total_count: number;
   pageable_count: number;

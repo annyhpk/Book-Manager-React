@@ -1,37 +1,40 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { BookInfo } from '../../typings/resType';
+import { BookInfo, BookState } from '../../typings/resType';
+import toIndexingData from '../../utils/toIndexingData';
 
 import { addBook, delBook, uptBook } from '../actions/book.action';
 
 // dummy Data Load
 import data from './dummyData';
 
-type BooksInfoState = {
-  documents: BookInfo[];
-};
+interface State {
+  documents: BookState;
+}
 
-const initialState: BooksInfoState = {
+const initialState: State = {
   documents: data,
 };
 
 export default createReducer(initialState, (builder) => {
   builder
     .addCase(addBook, (state, action) => {
+      const data: BookInfo[] = action.payload;
+      const indexedData = toIndexingData(data);
+
       return {
         ...state,
-        documents: [...action.payload, ...state.documents],
+        documents: { ...indexedData, ...state.documents },
       };
     })
     .addCase(delBook, (state, action) => {
-      return {
-        ...state,
-        documents: state.documents.filter((book) => book.isbn !== action.payload),
-      };
+      const isbn: number = action.payload;
+
+      return void delete state.documents[isbn];
     })
     .addCase(uptBook, (state, action) => {
-      const [id, amount] = action.payload;
+      const [isbn, amount]: [number, number] = action.payload;
 
-      return void (state.documents[id].amount = amount);
+      return void (state.documents[isbn].amount = amount);
     })
     .addDefaultCase((state) => state);
 });

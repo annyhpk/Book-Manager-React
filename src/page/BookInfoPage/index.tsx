@@ -1,10 +1,10 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { delBook, uptBook } from '../../modules/actions/book.action';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { RootState } from '../../modules/reducers';
-import { BookInfo } from '../../typings/resType';
+import { BookInfo, BookState } from '../../typings/resType';
 import useInput from '../../hooks/useInput';
 import dayjs from 'dayjs';
 
@@ -15,9 +15,17 @@ import 'react-toastify/dist/ReactToastify.css';
 const BookInfoPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { post, isbn } = useParams<{ post: string; isbn: string }>();
-  const bookInfo: BookInfo[] = useAppSelector((state: RootState) => state.book.documents);
-  const pageInfo: BookInfo = bookInfo.filter((info) => info.isbn === isbn)[0];
+  const { isbn } = useParams<{ post: string; isbn: string }>();
+  const curPageIsbn: number = isbn ? parseInt(isbn) : 0;
+  const bookInfo: BookState = useAppSelector((state: RootState) => state.book.documents);
+  const pageInfo: BookInfo = bookInfo[curPageIsbn];
+
+  useEffect(() => {
+    if (!curPageIsbn || !pageInfo) {
+      alert('잘못된 접근입니다.');
+      navigate('/NotFound404');
+    }
+  }, [curPageIsbn, navigate, pageInfo]);
 
   const [bookAmount, onChangeBookAmount] = useInput(pageInfo.amount);
 
@@ -35,78 +43,47 @@ const BookInfoPage: FC = () => {
       });
   }, [pageInfo.isbn]);
 
-  // bookData {
-  //   authors: string[];
-  //   contents: string;
-  //   datetime: Date;
-  //   isbn: string;
-  //   price: number;
-  //   publisher: string;
-  //   sale_price: number;
-  //   status: string;
-  //   thumbnail: string;
-  //   title: string;
-  //   translators: string[];
-  //   url: string;
-  //   amount: number;
-  // }
-
-  const onClickHome = useCallback(() => {
-    navigate('/');
-  }, [navigate]);
-
-  const wrongApproachAlert = useCallback(() => {
-    alert('잘못된 접근입니다.');
-    navigate('/');
-  }, [navigate]);
-
   const onClickDelBook = useCallback(
     (e) => {
-      if (isbn) {
-        e.stopPropagation();
-        dispatch(delBook(isbn));
-        navigate('/');
-      } else {
-        wrongApproachAlert();
-      }
+      e.stopPropagation();
+      dispatch(delBook(curPageIsbn));
+      alert('성공적으로 삭제되었습니다.');
+      navigate('/');
     },
-    [isbn, dispatch, navigate, wrongApproachAlert],
+    [curPageIsbn, dispatch, navigate],
   );
 
   const onUpdateAmount = useCallback(
     (e) => {
       e.stopPropagation();
-      if (post) {
-        const postNum = parseInt(post);
-        const data: [number, number] = [postNum, bookAmount];
-        dispatch(uptBook(data));
-        toast('변경되었습니다.!');
-      } else {
-        wrongApproachAlert();
-      }
+      const data: [number, number] = [curPageIsbn, bookAmount];
+      dispatch(uptBook(data));
+      toast('변경되었습니다.!');
     },
-    [bookAmount, dispatch, post, wrongApproachAlert],
+    [bookAmount, dispatch, curPageIsbn],
   );
 
   return (
     <div className="container pt-8 mx-auto md:pt-12">
-      <div className="inline-flex ml-3 mb-3 p-1 bg-yellow-200 rounded-xl shadow-md" onClick={onClickHome}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-          />
-        </svg>
-        &nbsp;<b>메인페이지</b>
-      </div>
+      <Link to="/">
+        <div className="inline-flex ml-3 mb-3 p-1 bg-yellow-200 rounded-xl shadow-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+            />
+          </svg>
+          &nbsp;<b>메인페이지</b>
+        </div>
+      </Link>
       <div className="mx-auto container max-w-2xl md:w-3/4 shadow-md">
         <div className="bg-gray-100 p-4 border-t-2 bg-opacity-5 border-indigo-400 rounded-t">
           <h1 className="text-gray-700 text-center font-bold text-lg mb-3 bg-gray-200 rounded-xl">{pageInfo.title}</h1>

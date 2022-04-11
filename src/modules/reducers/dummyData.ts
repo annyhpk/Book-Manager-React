@@ -1,4 +1,5 @@
 import { BookInfo } from '../../typings/resType';
+import toIndexingData from '../../utils/toIndexingData';
 
 const cloneObj = (obj: BookInfo) => JSON.parse(JSON.stringify(obj));
 
@@ -29,4 +30,4 @@ for (let i = 0; i < 80; ++i) {
 
 const data: BookInfo[] = makeData || [dummyBookData];
 
-export default data;
+export default toIndexingData(data);
