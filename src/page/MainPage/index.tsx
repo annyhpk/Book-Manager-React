@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC, useMemo } from 'react';
+import React, { useCallback, useState, FC, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
@@ -17,16 +17,21 @@ const MainPage: FC = () => {
   const pageNum = useMemo(() => parseInt(page || '1'), [page]);
 
   // 현재 페이지 상태 정보
-  const [searchValue, onChangeSearch] = useInput<string>('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchValue, _, setSearchValue] = useInput<string>('');
+  const searchRef = useRef<HTMLInputElement>(null);
   const [showSearchResultModal, setShowSearchResultModal] = useState<boolean>(false);
   const [searchResultInfo, setSearchResultInfo] = useState<BookInfo[]>([]);
 
   // 현재 페이지에 로드할 데이터 범위 계산
   const [firstArticle, endArticle] = useMemo(() => [(pageNum - 1) * 15, 15 * pageNum], [pageNum]);
   const booksInfo = useAppSelector((state: RootState) => {
+    const booksInfoPerPage = Object.values(state.book.documents).slice(firstArticle, endArticle);
+    const totalBook = Object.keys(state.book.documents).length;
+
     return {
-      booksInfo: state.book.documents.slice(firstArticle, endArticle),
-      length: state.book.documents.length,
+      booksInfo: booksInfoPerPage,
+      length: totalBook,
     };
   });
   const pageOfBooksInfo = useMemo(() => booksInfo.booksInfo, [booksInfo]);
@@ -100,11 +105,18 @@ const MainPage: FC = () => {
         {/* 책정보 검색창 */}
         <form className="pt-1 h-10" onSubmit={onSearchBook}>
           <input
+            ref={searchRef}
             className="rounded-lg text-center border"
             type="search"
             placeholder="도서명으로 검색"
-            value={searchValue}
-            onChange={onChangeSearch}
+            onKeyUp={() => {
+              const searchQuery = searchRef.current ? searchRef.current.value : '';
+              setTimeout(() => {
+                if (searchQuery === searchRef.current?.value) {
+                  setSearchValue(searchQuery);
+                }
+              }, 400);
+            }}
           />
         </form>
       </header>
