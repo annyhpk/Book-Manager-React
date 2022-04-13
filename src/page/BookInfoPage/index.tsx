@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { delBook, uptBook } from '../../modules/actions/book.action';
 import { useParams, useNavigate, Link } from 'react-router-dom';
@@ -19,13 +19,6 @@ const BookInfoPage: FC = () => {
   const curPageIsbn: number = isbn ? parseInt(isbn) : 0;
   const bookInfo: BookState = useAppSelector((state: RootState) => state.book.documents);
   const pageInfo: BookInfo = bookInfo[curPageIsbn];
-
-  useEffect(() => {
-    if (!curPageIsbn || !pageInfo) {
-      alert('잘못된 접근입니다.');
-      navigate('/NotFound404');
-    }
-  }, [curPageIsbn, navigate, pageInfo]);
 
   const [bookAmount, onChangeBookAmount] = useInput(pageInfo.amount);
 
