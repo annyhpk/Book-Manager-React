@@ -11,9 +11,9 @@ const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
 
   // 페이지 버튼을 누르면 해당페이지로 이동
   const onClickRedirect = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      navigate(`/books/${e.target.value}`);
+      navigate(`/books/${e.currentTarget.value}`);
     },
     [navigate],
   );
@@ -60,7 +60,7 @@ const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
   }
 
   return (
-    <div className="flex flex-row justify-evenly w-full h-16 py-6 relative left-0 bottom-0 md:-bottom-8 md:px-20 lg:px-56">
+    <div className="flex flex-row justify-evenly w-full h-16 py-6 absolute left-0 md:px-20 lg:px-56">
       {/* 처음으로 가는 버튼 */}
       <svg
         xmlns="http://www.w3.org/2000/svg"

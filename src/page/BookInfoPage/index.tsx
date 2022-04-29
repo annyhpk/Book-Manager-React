@@ -37,7 +37,7 @@ const BookInfoPage: FC = () => {
   }, [pageInfo.isbn]);
 
   const onClickDelBook = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLDivElement>) => {
       e.stopPropagation();
       dispatch(delBook(curPageIsbn));
       alert('성공적으로 삭제되었습니다.');
@@ -47,7 +47,7 @@ const BookInfoPage: FC = () => {
   );
 
   const onUpdateAmount = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.stopPropagation();
       const data: [number, number] = [curPageIsbn, bookAmount];
       dispatch(uptBook(data));

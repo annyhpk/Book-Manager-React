@@ -2,12 +2,11 @@ import { ChangeEvent, Dispatch, SetStateAction, useCallback, useState } from 're
 
 type ReturnTypes<T> = [T, (e: ChangeEvent<HTMLInputElement>) => void, Dispatch<SetStateAction<T>>];
 
-const useInput = <T>(initialData: T): ReturnTypes<T> => {
-  const [value, setValue] = useState(initialData);
+const useInput = <T>(initialValue: T): ReturnTypes<T> => {
+  const [value, setValue] = useState<T>(initialValue);
 
-  const handler = useCallback((e) => {
-    setValue(e.currentTarget.value);
-  }, []);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handler = useCallback((e: any) => setValue(e.currentTarget.value), []);
 
   return [value, handler, setValue];
 };

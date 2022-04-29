@@ -11,9 +11,9 @@ interface Props {
 const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBookList }: Props) => {
   // 검색된 책 정보 리스트 클릭시 [선택-선택취소] 구현 부분
   const onClickBook = useCallback(
-    (e) => {
-      const isbn = e.currentTarget.firstChild.textContent;
-      if (e.currentTarget && e.currentTarget.firstChild.nodeName === 'TD' && !selectedBookList.includes(isbn)) {
+    (e: React.MouseEvent<HTMLTableRowElement>): void => {
+      const isbn: string = e.currentTarget.dataset.isbn || '';
+      if (!selectedBookList.includes(isbn)) {
         setSelectedBookList((prev: string[]) => [...prev, isbn]);
       } else {
         setSelectedBookList((prev: string[]) => prev.filter((selectedIsbn) => selectedIsbn !== isbn));
@@ -29,6 +29,7 @@ const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBo
           return (
             <tr
               key={book.isbn}
+              data-isbn={book.isbn}
               onClick={onClickBook}
               className={selectedBookList.includes(book.isbn) ? 'bg-green-400 bg-opacity-30 bg-clip-border' : ''}
             >

@@ -11,7 +11,7 @@ const Modal: FC<Props> = ({ show, children, onCloseModal }: Props) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   // 이벤트 전파 막는 함수
-  const stopPropagation = useCallback((e) => {
+  const stopPropagation = useCallback((e: React.MouseEvent<HTMLDivElement>): void => {
     e.stopPropagation();
   }, []);
 
@@ -33,7 +33,7 @@ const Modal: FC<Props> = ({ show, children, onCloseModal }: Props) => {
       <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
       <div
-        className="modal-container bg-white w-11/12 h-screen lg:max-w-xl md:max-w-lg mx-auto rounded-xl shadow-lg z-50 overflow-y-auto"
+        className="cursor-pointer modal-container bg-white w-11/12 h-screen lg:max-w-xl md:max-w-lg mx-auto rounded-xl shadow-lg z-50 overflow-y-auto"
         onClick={stopPropagation}
         ref={scrollRef}
       >

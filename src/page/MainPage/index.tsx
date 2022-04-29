@@ -48,7 +48,7 @@ const MainPage: FC = () => {
 
   // 책검색
   const onSearchBook = useCallback(
-    (e) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       if (searchValue.trim() === '' && !searchValue.trim().length) {
         return null;

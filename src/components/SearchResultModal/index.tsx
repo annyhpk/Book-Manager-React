@@ -29,7 +29,7 @@ const SearchResultModal: FC<Props> = ({
   const [isEndFlag, setIsEndFlag] = useState<boolean>(false);
 
   const onClickNewPageLoad = useCallback(
-    (e) => {
+    (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       getBooksInfo(page, searchValue)
         .then((response) => {
@@ -49,7 +49,7 @@ const SearchResultModal: FC<Props> = ({
   );
 
   const onSubmitBook = useCallback(
-    (e) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       //선택한 책정보 리덕스에 저장
       if (Array.isArray(searchResultInfo) && searchResultInfo.length) {
