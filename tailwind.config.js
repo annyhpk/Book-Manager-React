@@ -19,7 +19,22 @@ module.exports = {
       200: '2',
       400: '4',
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(15px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        fadeOutDown: {
+          '0%': { opacity: 1, transform: 'translateY(0)' },
+          '100%': { opacity: 0, transform: 'translateY(15px)' },
+        },
+      },
+      animation: {
+        fadeInUp: 'fadeInUp 0.4s ease-out',
+        fadeOutDown: 'fadeOutDown 0.4s ease-out',
+      },
+    },
   },
   variants: {
     extend: {},
