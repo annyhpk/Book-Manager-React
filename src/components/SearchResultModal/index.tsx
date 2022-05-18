@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useCallback, useState, FC, useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useCallback, useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
@@ -7,22 +7,13 @@ import getBooksInfo from '../../utils/getBooksInfo';
 const BookList = React.lazy(() => import('../ModalSearchBookList'));
 const Modal = React.lazy(() => import('../Modal'));
 interface Props {
-  show: boolean;
   onCloseModal: () => void;
-  setShowSearchResultModal: Dispatch<SetStateAction<boolean>>;
   searchResultInfo?: BookInfo[];
   setSearchResultInfo: Dispatch<SetStateAction<BookInfo[]>>;
   searchValue: string;
 }
 
-const SearchResultModal: FC<Props> = ({
-  show,
-  onCloseModal,
-  setShowSearchResultModal,
-  searchResultInfo,
-  setSearchResultInfo,
-  searchValue,
-}: Props) => {
+const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, setSearchResultInfo, searchValue }: Props) => {
   const dispatch = useDispatch();
   const [selectedBookList, setSelectedBookList] = useState<string[]>([]);
   const [page, setPage] = useState<number>(2);
@@ -59,24 +50,20 @@ const SearchResultModal: FC<Props> = ({
         dispatch(addBook(selectedBooks));
       }
       // 저장 성공시 모달 닫기
-      setShowSearchResultModal(false);
+      onCloseModal();
       setSelectedBookList([]);
     },
-    [dispatch, searchResultInfo, selectedBookList, setShowSearchResultModal],
+    [dispatch, onCloseModal, searchResultInfo, selectedBookList],
   );
 
-  useEffect(() => {
-    setIsEndFlag(false);
-  }, [show]);
-
   return (
-    <Modal show={show} onCloseModal={onCloseModal}>
-      {show && Array.isArray(searchResultInfo) && !searchResultInfo?.length ? (
+    <Modal onCloseModal={onCloseModal}>
+      {Array.isArray(searchResultInfo) && !searchResultInfo?.length ? (
         <div>찾으시는 책정보를 찾지 못하였습니다.</div>
       ) : (
         <form onSubmit={onSubmitBook}>
-          <table className="table-auto text-center border-gray-600 border-t-2">
-            <thead>
+          <table className="table-auto text-center border-gray-600 border-t-2 cursor-pointer">
+            <thead className="sticky top-9 bg-slate-200 z-50">
               <tr>
                 <th>도서</th>
                 <th>(상태)도서명</th>
