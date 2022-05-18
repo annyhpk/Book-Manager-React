@@ -33,11 +33,9 @@ const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBo
               onClick={onClickBook}
               className={selectedBookList.includes(book.isbn) ? 'bg-green-400 bg-opacity-30 bg-clip-border' : ''}
             >
-              {/* 식별을 위한 숨겨진 엘리먼트 */}
-              <td className="hidden">{book.isbn}</td>
               <td>
                 <img
-                  className="transform hover:scale-180 sm:hover:scale-400 hover:translate-x-5 z-2 hover:absolute z-10 transition-all shadow-lg"
+                  className="transform hover:scale-150 z-2 hover:translate-x-9 hover:relative hover:z-10 transition-all shadow-lg"
                   width="200"
                   loading="lazy"
                   src={book.thumbnail}
