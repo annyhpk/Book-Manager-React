@@ -20,7 +20,7 @@ const MainPage: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchValue, _, setSearchValue] = useInput<string>('');
   const searchRef = useRef<HTMLInputElement>(null);
-  const [showSearchResultModal, setShowSearchResultModal] = useState<boolean>(false);
+  const modalRef = useRef<HTMLDialogElement>(null);
   const [searchResultInfo, setSearchResultInfo] = useState<BookInfo[]>([]);
 
   // 현재 페이지에 로드할 데이터 범위 계산
@@ -43,7 +43,7 @@ const MainPage: FC = () => {
 
   // 모달창 닫기
   const onCloseModal = useCallback(() => {
-    setShowSearchResultModal(false);
+    modalRef.current?.removeAttribute('open');
   }, []);
 
   // 책검색
@@ -55,7 +55,7 @@ const MainPage: FC = () => {
       }
       getBooksInfo(pageNum, searchValue)
         .then((response) => {
-          setShowSearchResultModal(true);
+          modalRef.current?.setAttribute('open', 'open');
           setSearchResultInfo(response.data.documents);
         })
         .catch((reason) => {
@@ -115,7 +115,7 @@ const MainPage: FC = () => {
                 if (searchQuery === searchRef.current?.value) {
                   setSearchValue(searchQuery);
                 }
-              }, 400);
+              }, 300);
             }}
           />
         </form>
@@ -141,14 +141,14 @@ const MainPage: FC = () => {
       <Pagination currentPage={pageNum} totalPage={totalPage} />
 
       {/* 책 검색 결과 모달창 */}
-      <SearchResultModal
-        show={showSearchResultModal}
-        onCloseModal={onCloseModal}
-        setShowSearchResultModal={setShowSearchResultModal}
-        searchResultInfo={searchResultInfo}
-        setSearchResultInfo={setSearchResultInfo}
-        searchValue={searchValue}
-      />
+      <dialog id="dialog" ref={modalRef}>
+        <SearchResultModal
+          onCloseModal={onCloseModal}
+          searchResultInfo={searchResultInfo}
+          setSearchResultInfo={setSearchResultInfo}
+          searchValue={searchValue}
+        />
+      </dialog>
     </div>
   );
 };
