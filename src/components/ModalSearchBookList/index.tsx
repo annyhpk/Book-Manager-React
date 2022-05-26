@@ -38,6 +38,7 @@ const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBo
                   className="transform hover:scale-150 z-2 hover:translate-x-9 hover:relative hover:z-10 transition-all shadow-lg"
                   width="200"
                   loading="lazy"
+                  decoding="async"
                   src={book.thumbnail}
                   alt={book.title}
                 />
