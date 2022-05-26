@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC, useMemo, useRef } from 'react';
+import React, { useCallback, useState, FC, useMemo, useRef, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
@@ -19,9 +19,10 @@ const MainPage: FC = () => {
   // 현재 페이지 상태 정보
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchValue, _, setSearchValue] = useInput<string>('');
+  const [searchResultInfo, setSearchResultInfo] = useState<BookInfo[]>([]);
+  const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
   const searchRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDialogElement>(null);
-  const [searchResultInfo, setSearchResultInfo] = useState<BookInfo[]>([]);
 
   // 현재 페이지에 로드할 데이터 범위 계산
   const [firstArticle, endArticle] = useMemo(() => [(pageNum - 1) * 15, 15 * pageNum], [pageNum]);
@@ -37,14 +38,27 @@ const MainPage: FC = () => {
   const pageOfBooksInfo = useMemo(() => booksInfo.booksInfo, [booksInfo]);
 
   // 페이지당 데이터
-  const dataPerPage = 15 as const;
+  const dataPerPage = useMemo(() => 15 as const, []);
   // 전체 페이지 계산
-  const totalPage = useMemo(() => Math.ceil(booksInfo.length / dataPerPage), [booksInfo]);
+  const totalPage = useMemo(() => Math.ceil(booksInfo.length / dataPerPage), [booksInfo.length, dataPerPage]);
 
   // 모달창 닫기
   const onCloseModal = useCallback(() => {
     modalRef.current?.removeAttribute('open');
   }, []);
+
+  // 검색창 디바운싱
+  const onKeyUpSearchValue = useCallback(() => {
+    const searchQuery: string = searchRef.current?.value || '';
+    if (timer) {
+      clearTimeout(timer);
+    }
+    setTimer(
+      setTimeout(() => {
+        setSearchValue(searchQuery);
+      }, 300),
+    );
+  }, [setSearchValue, timer]);
 
   // 책검색
   const onSearchBook = useCallback(
@@ -77,9 +91,11 @@ const MainPage: FC = () => {
     [pageNum, searchValue],
   );
 
-  if (isNaN(pageNum) || !pageNum || pageNum > totalPage) {
-    navigate('/notFound');
-  }
+  useEffect(() => {
+    if (isNaN(pageNum) || !pageNum || pageNum > totalPage) {
+      navigate('/notFound');
+    }
+  }, [navigate, pageNum, totalPage]);
 
   return (
     <div className="container pt-8 mx-auto md:pt-16">
@@ -109,14 +125,7 @@ const MainPage: FC = () => {
             className="rounded-lg text-center border"
             type="search"
             placeholder="도서명으로 검색"
-            onKeyUp={() => {
-              const searchQuery = searchRef.current ? searchRef.current.value : '';
-              setTimeout(() => {
-                if (searchQuery === searchRef.current?.value) {
-                  setSearchValue(searchQuery);
-                }
-              }, 300);
-            }}
+            onKeyUp={onKeyUpSearchValue}
           />
         </form>
       </header>
