@@ -87,18 +87,16 @@ const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
       </svg>
       {/* Page Group 표시 */}
-      {calculatePages?.map((page) => {
-        return (
-          <button
-            key={page}
-            className={`h-6 w-6 rounded-md shadow-md ${currentPage === page ? 'bg-gray-500 font-bold' : 'bg-gray-400'}`}
-            onClick={onClickRedirect}
-            value={page}
-          >
-            {page}
-          </button>
-        );
-      })}
+      {calculatePages?.map((page) => (
+        <button
+          key={page}
+          className={`h-6 w-6 rounded-md shadow-md ${currentPage === page ? 'bg-gray-500 font-bold' : 'bg-gray-400'}`}
+          onClick={onClickRedirect}
+          value={page}
+        >
+          {page}
+        </button>
+      ))}
       {/* 다음 버튼 */}
       <svg
         xmlns="http://www.w3.org/2000/svg"
