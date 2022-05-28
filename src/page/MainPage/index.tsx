@@ -20,7 +20,6 @@ const MainPage: FC = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [searchValue, _, setSearchValue] = useInput<string>('');
   const [searchResultInfo, setSearchResultInfo] = useState<BookInfo[]>([]);
-  const [timer, setTimer] = useState<ReturnType<typeof setTimeout>>();
   const searchRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDialogElement>(null);
 
@@ -50,15 +49,10 @@ const MainPage: FC = () => {
   // 검색창 디바운싱
   const onKeyUpSearchValue = useCallback(() => {
     const searchQuery: string = searchRef.current?.value || '';
-    if (timer) {
-      clearTimeout(timer);
-    }
-    setTimer(
-      setTimeout(() => {
-        setSearchValue(searchQuery);
-      }, 300),
-    );
-  }, [setSearchValue, timer]);
+    setTimeout(() => {
+      if (searchQuery === searchRef.current?.value) setSearchValue(searchQuery);
+    }, 300);
+  }, [setSearchValue]);
 
   // 책검색
   const onSearchBook = useCallback(
