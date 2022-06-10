@@ -1,19 +1,17 @@
-import React, { Dispatch, SetStateAction, useCallback, useState, FC } from 'react';
+import React, { useCallback, useState, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
-import getBooksInfo from '../../utils/getBooksInfo';
 
 const BookList = React.lazy(() => import('../ModalSearchBookList'));
 const Modal = React.lazy(() => import('../Modal'));
 interface Props {
   onCloseModal: () => void;
   searchResultInfo?: BookInfo[];
-  setSearchResultInfo: Dispatch<SetStateAction<BookInfo[]>>;
-  searchValue: string;
+  NewPageLoad: (page: number) => Promise<boolean>;
 }
 
-const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, setSearchResultInfo, searchValue }: Props) => {
+const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, NewPageLoad }: Props) => {
   const dispatch = useDispatch();
   const [selectedBookList, setSelectedBookList] = useState<string[]>([]);
   const [page, setPage] = useState<number>(2);
@@ -22,21 +20,12 @@ const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, setSearc
   const onClickNewPageLoad = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      getBooksInfo(page, searchValue)
-        .then((response) => {
-          if (setSearchResultInfo !== undefined) {
-            setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
-            if (response.data.meta.is_end) {
-              setIsEndFlag(true);
-            }
-          }
-          setPage((prev) => prev + 1);
-        })
-        .catch((error) => {
-          console.dir(error);
-        });
+      NewPageLoad(page).then((isEnd) => {
+        setIsEndFlag(isEnd);
+        setPage((prev) => prev + 1);
+      });
     },
-    [page, searchValue, setSearchResultInfo],
+    [NewPageLoad, page],
   );
 
   const onSubmitBook = useCallback(

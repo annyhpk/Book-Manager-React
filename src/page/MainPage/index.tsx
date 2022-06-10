@@ -1,15 +1,15 @@
-import React, { useCallback, useState, FC, useMemo, useRef, useEffect } from 'react';
+import React, { useCallback, useState, FC, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
 
-import useInput from '../../hooks/useInput';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import getBooksInfo from '../../utils/getBooksInfo';
 
 const SearchResultModal = React.lazy(() => import('../../components/SearchResultModal'));
 const Pagination = React.lazy(() => import('../../components/Pagination'));
 const MainBookList = React.lazy(() => import('../../components/MainBookList'));
+const SearchInput = React.lazy(() => import('../../components/SearchInput'));
 
 const MainPage: FC = () => {
   const navigate = useNavigate();
@@ -17,10 +17,8 @@ const MainPage: FC = () => {
   const pageNum = useMemo(() => parseInt(page || '1'), [page]);
 
   // 현재 페이지 상태 정보
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [searchValue, _, setSearchValue] = useInput<string>('');
+  const [searchValue, setSearchValue] = useState<string>('');
   const [searchResultInfo, setSearchResultInfo] = useState<BookInfo[]>([]);
-  const searchRef = useRef<HTMLInputElement>(null);
   const modalRef = useRef<HTMLDialogElement>(null);
 
   // 현재 페이지에 로드할 데이터 범위 계산
@@ -46,25 +44,14 @@ const MainPage: FC = () => {
     modalRef.current?.removeAttribute('open');
   }, []);
 
-  // 검색창 디바운싱
-  const onKeyUpSearchValue = useCallback(() => {
-    const searchQuery: string = searchRef.current?.value || '';
-    setTimeout(() => {
-      if (searchQuery === searchRef.current?.value) setSearchValue(searchQuery);
-    }, 300);
-  }, [setSearchValue]);
-
-  // 책검색
-  const onSearchBook = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (searchValue.trim() === '' && !searchValue.trim().length) {
-        return null;
-      }
-      getBooksInfo(pageNum, searchValue)
+  // 페이지 요청 함수
+  const NewPageLoad = useCallback(
+    (pageNum: number, searchQuery = searchValue) => {
+      return getBooksInfo(pageNum, searchQuery)
         .then((response) => {
-          modalRef.current?.setAttribute('open', 'open');
-          setSearchResultInfo(response.data.documents);
+          setSearchResultInfo((prev) => [...prev, ...response.data.documents]);
+          // 마지막 페이지 여부 전달
+          return response.data.meta.is_end;
         })
         .catch((reason) => {
           if (reason.response) {
@@ -80,16 +67,35 @@ const MainPage: FC = () => {
             console.log('Error', reason.message);
           }
           alert(`죄송합니다. 통신에 문제가 발생하였습니다.`);
+
+          return true;
         });
     },
-    [pageNum, searchValue],
+    [searchValue, setSearchResultInfo],
   );
 
-  useEffect(() => {
-    if (isNaN(pageNum) || !pageNum || pageNum > totalPage) {
-      navigate('/notFound');
-    }
-  }, [navigate, pageNum, totalPage]);
+  // 책검색
+  const onSearchBook = useCallback(
+    (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const formData = new FormData(e.currentTarget);
+      const searchQuery = formData.get('searchValue') as string;
+      if (searchQuery.trim() === '' && !searchQuery.trim().length) {
+        return null;
+      }
+      setSearchResultInfo([]);
+      setSearchValue(searchQuery);
+      // 책정보 정보 로드
+      NewPageLoad(pageNum, searchQuery).then(() => {
+        modalRef.current?.setAttribute('open', 'true');
+      });
+    },
+    [NewPageLoad, pageNum, setSearchValue],
+  );
+
+  if (isNaN(pageNum) || !pageNum || pageNum > totalPage) {
+    navigate('/notFound');
+  }
 
   return (
     <div className="container pt-8 mx-auto md:pt-16">
@@ -114,13 +120,13 @@ const MainPage: FC = () => {
         </div>
         {/* 책정보 검색창 */}
         <form className="pt-1 h-10" onSubmit={onSearchBook}>
-          <input
-            ref={searchRef}
-            className="rounded-lg text-center border"
-            type="search"
-            placeholder="도서명으로 검색"
-            onKeyUp={onKeyUpSearchValue}
-          />
+          <SearchInput />
+          <button
+            className="g-white hover:bg-gray-100 text-gray-800 font-semibold py-0.7 px-3 border border-gray-400 rounded shadow"
+            type="submit"
+          >
+            검색
+          </button>
         </form>
       </header>
       <main className="flex flex-col mt-8 mx-3 sm:mt-4 md:mx-8 lg:mx-24 justify-center">
@@ -145,12 +151,7 @@ const MainPage: FC = () => {
 
       {/* 책 검색 결과 모달창 */}
       <dialog id="dialog" ref={modalRef}>
-        <SearchResultModal
-          onCloseModal={onCloseModal}
-          searchResultInfo={searchResultInfo}
-          setSearchResultInfo={setSearchResultInfo}
-          searchValue={searchValue}
-        />
+        <SearchResultModal onCloseModal={onCloseModal} searchResultInfo={searchResultInfo} NewPageLoad={NewPageLoad} />
       </dialog>
     </div>
   );
