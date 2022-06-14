@@ -44,8 +44,8 @@ const MainPage: FC = () => {
     modalRef.current?.removeAttribute('open');
   }, []);
 
-  // 페이지 요청 함수
-  const NewPageLoad = useCallback(
+  // 책정보 요청 함수
+  const bookDataLoad = useCallback(
     (pageNum: number, searchQuery = searchValue) => {
       return getBooksInfo(pageNum, searchQuery)
         .then((response) => {
@@ -53,22 +53,8 @@ const MainPage: FC = () => {
           // 마지막 페이지 여부 전달
           return response.data.meta.is_end;
         })
-        .catch((reason) => {
-          if (reason.response) {
-            // 요청이 전송되었고, 서버는 2xx 외의 상태 코드로 응답했습니다.
-            console.log(reason.response.data);
-            console.log(reason.response.status);
-            console.log(reason.response.headers);
-          } else if (reason.request) {
-            // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
-            console.log(reason.request);
-          } else {
-            // 오류가 발생한 요청을 설정하는 동안 문제가 발생했습니다.
-            console.log('Error', reason.message);
-          }
-          alert(`죄송합니다. 통신에 문제가 발생하였습니다.`);
-
-          return true;
+        .catch((err) => {
+          throw new Error('BookDataLoad job result failed', { cause: err });
         });
     },
     [searchValue, setSearchResultInfo],
@@ -76,7 +62,7 @@ const MainPage: FC = () => {
 
   // 책검색
   const onSearchBook = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
+    async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const formData = new FormData(e.currentTarget);
       const searchQuery = formData.get('searchValue') as string;
@@ -85,12 +71,16 @@ const MainPage: FC = () => {
       }
       setSearchResultInfo([]);
       setSearchValue(searchQuery);
-      // 책정보 정보 로드
-      NewPageLoad(pageNum, searchQuery).then(() => {
+      try {
+        // 책정보 정보 로드
+        await bookDataLoad(pageNum, searchQuery);
+        // 모달창 오픈
         modalRef.current?.setAttribute('open', 'true');
-      });
+      } catch (error) {
+        if (error instanceof Error) console.log(`Caused by ${error?.cause}`);
+      }
     },
-    [NewPageLoad, pageNum, setSearchValue],
+    [bookDataLoad, pageNum, setSearchValue],
   );
 
   if (isNaN(pageNum) || !pageNum || pageNum > totalPage) {
@@ -151,7 +141,11 @@ const MainPage: FC = () => {
 
       {/* 책 검색 결과 모달창 */}
       <dialog id="dialog" ref={modalRef}>
-        <SearchResultModal onCloseModal={onCloseModal} searchResultInfo={searchResultInfo} NewPageLoad={NewPageLoad} />
+        <SearchResultModal
+          onCloseModal={onCloseModal}
+          searchResultInfo={searchResultInfo}
+          bookDataLoad={bookDataLoad}
+        />
       </dialog>
     </div>
   );

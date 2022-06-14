@@ -8,24 +8,27 @@ const Modal = React.lazy(() => import('../Modal'));
 interface Props {
   onCloseModal: () => void;
   searchResultInfo?: BookInfo[];
-  NewPageLoad: (page: number) => Promise<boolean>;
+  bookDataLoad: (page: number) => Promise<boolean>;
 }
 
-const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, NewPageLoad }: Props) => {
+const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, bookDataLoad }: Props) => {
   const dispatch = useDispatch();
   const [selectedBookList, setSelectedBookList] = useState<string[]>([]);
   const [page, setPage] = useState<number>(2);
   const [isEndFlag, setIsEndFlag] = useState<boolean>(false);
 
   const onClickNewPageLoad = useCallback(
-    (e: React.MouseEvent<HTMLButtonElement>) => {
+    async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
-      NewPageLoad(page).then((isEnd) => {
+      try {
+        const isEnd = await bookDataLoad(page);
         setIsEndFlag(isEnd);
         setPage((prev) => prev + 1);
-      });
+      } catch (error) {
+        if (error instanceof Error) console.log(`Caused by ${error?.cause}`);
+      }
     },
-    [NewPageLoad, page],
+    [bookDataLoad, page],
   );
 
   const onSubmitBook = useCallback(
