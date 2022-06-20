@@ -13,7 +13,7 @@ const MainBookList: FC<Props> = ({ pageOfBooksInfo, pageNum }: Props) => {
     <>
       {pageOfBooksInfo !== undefined &&
         pageOfBooksInfo?.map((book: BookInfo, index: number) => (
-          <tr key={book.isbn}>
+          <tr key={book.isbn} className="dark:text-gray-100">
             <td>
               <b>{`[${book.status}]`}</b> <Link to={`/book/${index * pageNum}/${book.isbn}`}>{book.title}</Link>
             </td>

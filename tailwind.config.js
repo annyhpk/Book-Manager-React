@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'jit',
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     scale: {
       0: '0',
@@ -20,6 +20,10 @@ module.exports = {
       400: '4',
     },
     extend: {
+      colors: {
+        darkBlue: '#202b38',
+        ivory: '#fffbeb',
+      },
       keyframes: {
         fadeInUp: {
           '0%': { opacity: 0, transform: 'translateY(15px)' },
