@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/Book-Manager-React/build/static/css/main.33ec0b8b.css",
-    "main.js": "/Book-Manager-React/build/static/js/main.e51132a5.js",
+    "main.js": "/Book-Manager-React/build/static/js/main.d7e76962.js",
     "static/js/359.31b13711.chunk.js": "/Book-Manager-React/build/static/js/359.31b13711.chunk.js",
     "static/js/515.a4202600.chunk.js": "/Book-Manager-React/build/static/js/515.a4202600.chunk.js",
     "static/js/272.35557ff3.chunk.js": "/Book-Manager-React/build/static/js/272.35557ff3.chunk.js",
     "static/js/218.11b2371c.chunk.js": "/Book-Manager-React/build/static/js/218.11b2371c.chunk.js",
     "static/js/505.1b7b02a2.chunk.js": "/Book-Manager-React/build/static/js/505.1b7b02a2.chunk.js",
     "static/js/644.3eb8dadf.chunk.js": "/Book-Manager-React/build/static/js/644.3eb8dadf.chunk.js",
-    "static/js/40.9a18296e.chunk.js": "/Book-Manager-React/build/static/js/40.9a18296e.chunk.js",
+    "static/js/40.1bf2b539.chunk.js": "/Book-Manager-React/build/static/js/40.1bf2b539.chunk.js",
     "static/js/202.27ee334b.chunk.js": "/Book-Manager-React/build/static/js/202.27ee334b.chunk.js",
     "static/js/801.9cceeb1c.chunk.js": "/Book-Manager-React/build/static/js/801.9cceeb1c.chunk.js",
     "static/js/8.8fd05018.chunk.js": "/Book-Manager-React/build/static/js/8.8fd05018.chunk.js",
     "static/css/544.da552509.chunk.css": "/Book-Manager-React/build/static/css/544.da552509.chunk.css",
     "index.html": "/Book-Manager-React/build/index.html",
     "main.33ec0b8b.css.map": "/Book-Manager-React/build/static/css/main.33ec0b8b.css.map",
-    "main.e51132a5.js.map": "/Book-Manager-React/build/static/js/main.e51132a5.js.map",
+    "main.d7e76962.js.map": "/Book-Manager-React/build/static/js/main.d7e76962.js.map",
     "359.31b13711.chunk.js.map": "/Book-Manager-React/build/static/js/359.31b13711.chunk.js.map",
     "515.a4202600.chunk.js.map": "/Book-Manager-React/build/static/js/515.a4202600.chunk.js.map",
     "272.35557ff3.chunk.js.map": "/Book-Manager-React/build/static/js/272.35557ff3.chunk.js.map",
     "218.11b2371c.chunk.js.map": "/Book-Manager-React/build/static/js/218.11b2371c.chunk.js.map",
     "505.1b7b02a2.chunk.js.map": "/Book-Manager-React/build/static/js/505.1b7b02a2.chunk.js.map",
     "644.3eb8dadf.chunk.js.map": "/Book-Manager-React/build/static/js/644.3eb8dadf.chunk.js.map",
-    "40.9a18296e.chunk.js.map": "/Book-Manager-React/build/static/js/40.9a18296e.chunk.js.map",
+    "40.1bf2b539.chunk.js.map": "/Book-Manager-React/build/static/js/40.1bf2b539.chunk.js.map",
     "202.27ee334b.chunk.js.map": "/Book-Manager-React/build/static/js/202.27ee334b.chunk.js.map",
     "801.9cceeb1c.chunk.js.map": "/Book-Manager-React/build/static/js/801.9cceeb1c.chunk.js.map",
     "8.8fd05018.chunk.js.map": "/Book-Manager-React/build/static/js/8.8fd05018.chunk.js.map",
@@ -30,6 +30,6 @@
   },
   "entrypoints": [
     "static/css/main.33ec0b8b.css",
-    "static/js/main.e51132a5.js"
+    "static/js/main.d7e76962.js"
   ]
 }
