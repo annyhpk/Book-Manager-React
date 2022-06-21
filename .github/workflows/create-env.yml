@@ -1,8 +1,0 @@
-name: create env
-
-on:
-  push:
-    branches: [ "main" ]
-
-env:
-  KAKAO_API_KEY: ${{ secrets.KAKAO_API_KEY }}
