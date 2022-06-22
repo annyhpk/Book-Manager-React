@@ -59,7 +59,7 @@ const BookInfoPage: FC = () => {
   return (
     <div className="container pt-8 mx-auto md:pt-12">
       <Link to="/">
-        <div className="inline-flex ml-3 mb-3 p-1 bg-yellow-200 rounded-xl shadow-md">
+        <div className="inline-flex ml-3 mb-3 p-1 bg-yellow-200 dark:bg-blue-900 rounded-xl shadow-md">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

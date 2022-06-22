@@ -28,17 +28,17 @@ const Modal: FC<Props> = ({ children, onCloseModal }: Props) => {
       <div className="modal-overlay absolute w-screen h-screen bg-gray-900 opacity-50"></div>
 
       <div
-        className="modal-container bg-white w-11/12 h-screen lg:max-w-xl md:max-w-lg mx-auto rounded-xl shadow-lg z-50 overflow-y-auto"
+        className="modal-container bg-white dark:bg-darkBlue dark:text-gray-100 w-11/12 h-screen lg:max-w-xl md:max-w-lg mx-auto rounded-xl shadow-lg z-50 overflow-y-auto"
         onClick={stopPropagation}
         ref={scrollRef}
       >
         <div className="modal-content py-4 text-left px-5">
           {/* <!--Title--> */}
-          <section className="flex justify-between items-center pb-3 h-10 sticky top-0 z-50 bg-white">
+          <section className="flex justify-between items-center pb-3 h-10 sticky top-0 z-50 bg-white dark:bg-darkBlue">
             <p className="text-2xl font-bold pt-2">원하는 도서를 클릭-!</p>
             <button type="button" className="modal-close cursor-pointer z-50" onClick={onCloseModal}>
               <svg
-                className="fill-current text-black"
+                className="fill-current text-black dark:text-gray-100"
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
                 height="32"

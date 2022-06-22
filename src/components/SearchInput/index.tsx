@@ -7,7 +7,7 @@ const SearchInput = () => {
   return (
     <input
       id="searchValue"
-      className="rounded-lg text-center border"
+      className="rounded-lg text-center border text-black"
       type="search"
       name="searchValue"
       placeholder="도서명으로 검색"

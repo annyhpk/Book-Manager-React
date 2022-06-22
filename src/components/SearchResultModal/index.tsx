@@ -55,7 +55,7 @@ const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, bookData
       ) : (
         <form onSubmit={onSubmitBook}>
           <table className="table-auto text-center border-gray-600 border-t-2 cursor-pointer">
-            <thead className="sticky top-9 bg-slate-200 z-50">
+            <thead className="sticky top-9 bg-slate-200 dark:bg-gray-700 z-50">
               <tr>
                 <th>도서</th>
                 <th>(상태)도서명</th>
@@ -74,14 +74,18 @@ const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, bookData
           {isEndFlag ? (
             <div className="h-11 w-full rounded-b-xl bg-gray-300 text-center leading-loose">마지막 검색결과입니다.</div>
           ) : (
-            <button className="h-11 w-full rounded-b-xl bg-gray-300" type="button" onClick={onClickNewPageLoad}>
+            <button
+              className="h-11 w-full rounded-b-xl bg-gray-300 dark:bg-gray-700"
+              type="button"
+              onClick={onClickNewPageLoad}
+            >
               결과 더보기
             </button>
           )}
-          <div className="flex fixed bottom-0.5 mr-1.5 right-9 md:right-1/4 lg:mr-12 xl:right-1/3 xl:mr-14 h-10 bg-green-200 rounded-xl">
+          <div className="flex fixed bottom-0.5 mr-1.5 right-9 md:right-1/4 lg:mr-12 xl:right-1/3 xl:mr-14 h-10 bg-green-200 dark:bg-slate-500 rounded-xl">
             <button
               type="submit"
-              className="px-2 bg-transparent p-3 rounded-xl text-gray-700 hover:bg-green-100 hover:text-gray-900 leading-4"
+              className="px-2 bg-transparent p-3 rounded-xl text-gray-700 dark:text-gray-200 dark:hover:bg-slate-400 hover:bg-green-100 hover:text-gray-900 leading-4"
             >
               도서등록
             </button>
