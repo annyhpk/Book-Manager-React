@@ -21,20 +21,17 @@ export default createReducer(initialState, (builder) => {
       const data: BookInfo[] = action.payload;
       const indexedData = toIndexingData(data);
 
-      return {
-        ...state,
-        documents: { ...indexedData, ...state.documents },
-      };
+      state.documents = { ...indexedData, ...state.documents };
     })
     .addCase(delBook, (state, action) => {
       const isbn: number = action.payload;
 
-      return void delete state.documents[isbn];
+      delete state.documents[isbn];
     })
     .addCase(uptBook, (state, action) => {
-      const [isbn, amount]: [number, number] = action.payload;
+      const [isbn, amount]: [number, number] = action.payload as [number, number];
 
-      return void (state.documents[isbn].amount = amount);
+      state.documents[isbn].amount = amount;
     })
     .addDefaultCase((state) => state);
 });
