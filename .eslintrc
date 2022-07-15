@@ -34,6 +34,7 @@
         "additionalHooks": "(useMyCustomHook|useMyOtherCustomHook)"
       }
     ],
-    "react-redux/connect-prefer-named-arguments": 2
+    "react-redux/connect-prefer-named-arguments": 2,
+    "react/react-in-jsx-scope": "off"
   }
 }

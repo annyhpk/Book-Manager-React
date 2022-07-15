@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { delBook, uptBook } from '../../modules/actions/book.action';
 import { useParams, useNavigate, Link } from 'react-router-dom';

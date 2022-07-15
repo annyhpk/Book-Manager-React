@@ -1,11 +1,11 @@
-import React, { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import { Route, Routes, Navigate } from 'react-router';
 import Spinner from '../../components/Spinner';
 
-const NotFound = React.lazy(() => import('../../page/NotFound'));
-const MainPage = React.lazy(() => import('../../page/MainPage'));
-const BookInfoPage = React.lazy(() => import('../../page/BookInfoPage'));
-const DarkModeToggle = React.lazy(() => import('../../components/DarkModeToggle'));
+const NotFound = lazy(() => import('../../page/NotFound'));
+const MainPage = lazy(() => import('../../page/MainPage'));
+const BookInfoPage = lazy(() => import('../../page/BookInfoPage'));
+const DarkModeToggle = lazy(() => import('../../components/DarkModeToggle'));
 
 function App() {
   return (

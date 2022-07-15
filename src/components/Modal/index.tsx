@@ -1,4 +1,4 @@
-import React, { useCallback, memo, useRef } from 'react';
+import { useCallback, memo, useRef } from 'react';
 
 interface Props {
   children: React.ReactNode;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Spinner() {
   return (
     <div className="flex justify-center text-center absolute w-screen top-1/4">

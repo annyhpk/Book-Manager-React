@@ -1,10 +1,10 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
 
-const BookList = React.lazy(() => import('../ModalSearchBookList'));
-const Modal = React.lazy(() => import('../Modal'));
+const BookList = lazy(() => import('../ModalSearchBookList'));
+const Modal = lazy(() => import('../Modal'));
 interface Props {
   onCloseModal: () => void;
   searchResultInfo?: BookInfo[];

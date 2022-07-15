@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useMemo, useRef } from 'react';
+import { useCallback, useState, useMemo, useRef, lazy } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
@@ -6,10 +6,10 @@ import { RootState } from '../../modules/reducers';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import getBooksInfo from '../../utils/getBooksInfo';
 
-const SearchResultModal = React.lazy(() => import('../../components/SearchResultModal'));
-const Pagination = React.lazy(() => import('../../components/Pagination'));
-const MainBookList = React.lazy(() => import('../../components/MainBookList'));
-const SearchInput = React.lazy(() => import('../../components/SearchInput'));
+const SearchResultModal = lazy(() => import('../../components/SearchResultModal'));
+const Pagination = lazy(() => import('../../components/Pagination'));
+const MainBookList = lazy(() => import('../../components/MainBookList'));
+const SearchInput = lazy(() => import('../../components/SearchInput'));
 
 function MainPage() {
   const navigate = useNavigate();

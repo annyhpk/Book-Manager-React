@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { memo, useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import { BookInfo } from '../../typings/resType';
 
 interface Props {

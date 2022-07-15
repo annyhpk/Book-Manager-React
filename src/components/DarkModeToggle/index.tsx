@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 
 function DarkModeToggle() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
