@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { FC, memo, useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import { BookInfo } from '../../typings/resType';
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
   selectedBookList: string[];
 }
 
-const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBookList }: Props) => {
+function BookList({ searchResultInfo, setSelectedBookList, selectedBookList }: Props) {
   // 검색된 책 정보 리스트 클릭시 [선택-선택취소] 구현 부분
   const onClickBook = useCallback(
     (e: React.MouseEvent<HTMLTableRowElement>): void => {
@@ -54,6 +54,6 @@ const BookList: FC<Props> = ({ searchResultInfo, setSelectedBookList, selectedBo
         })}
     </>
   );
-};
+}
 
 export default memo(BookList);

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useEffect, useState } from 'react';
 
-const DarkModeToggle: React.FC = () => {
+function DarkModeToggle() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const onClickDarkMode = useCallback(() => {
@@ -57,6 +57,6 @@ const DarkModeToggle: React.FC = () => {
       </span>
     </div>
   );
-};
+}
 
 export default memo(DarkModeToggle);

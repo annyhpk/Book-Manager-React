@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import useInput from '../../hooks/useInput';
 
-const SearchInput = () => {
+function SearchInput() {
   const [searchValue, onChangeSearchValue] = useInput<string>('');
 
   return (
@@ -15,6 +15,6 @@ const SearchInput = () => {
       onChange={onChangeSearchValue}
     />
   );
-};
+}
 
 export default memo(SearchInput);

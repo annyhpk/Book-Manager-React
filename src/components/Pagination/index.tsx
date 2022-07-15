@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, memo } from 'react';
+import React, { useCallback, useMemo, memo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
@@ -6,7 +6,7 @@ interface Props {
   totalPage: number;
 }
 
-const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
+function Pagination({ currentPage, totalPage }: Props) {
   const navigate = useNavigate();
 
   // 페이지 버튼을 누르면 해당페이지로 이동
@@ -125,6 +125,6 @@ const Pagination: FC<Props> = ({ currentPage, totalPage }: Props) => {
       </svg>
     </div>
   );
-};
+}
 
 export default memo(Pagination);

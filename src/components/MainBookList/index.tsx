@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import React, { FC, memo } from 'react';
+import React, { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 
@@ -8,7 +8,7 @@ type Props = {
   pageNum: number;
 };
 
-const MainBookList: FC<Props> = ({ pageOfBooksInfo, pageNum }: Props) => {
+function MainBookList({ pageOfBooksInfo, pageNum }: Props) {
   return (
     <>
       {pageOfBooksInfo !== undefined &&
@@ -24,6 +24,6 @@ const MainBookList: FC<Props> = ({ pageOfBooksInfo, pageNum }: Props) => {
         ))}
     </>
   );
-};
+}
 
 export default memo(MainBookList);

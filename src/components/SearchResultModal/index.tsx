@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../../modules/actions/book.action';
 import { BookInfo } from '../../typings/resType';
@@ -11,7 +11,7 @@ interface Props {
   bookDataLoad: (page: number) => Promise<boolean>;
 }
 
-const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, bookDataLoad }: Props) => {
+function SearchResultModal({ onCloseModal, searchResultInfo, bookDataLoad }: Props) {
   const dispatch = useDispatch();
   const [selectedBookList, setSelectedBookList] = useState<string[]>([]);
   const [page, setPage] = useState<number>(2);
@@ -94,6 +94,6 @@ const SearchResultModal: FC<Props> = ({ onCloseModal, searchResultInfo, bookData
       )}
     </Modal>
   );
-};
+}
 
 export default SearchResultModal;

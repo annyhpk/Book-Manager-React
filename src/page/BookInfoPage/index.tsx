@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { delBook, uptBook } from '../../modules/actions/book.action';
 import { useParams, useNavigate, Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const BookInfoPage: FC = () => {
+function BookInfoPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isbn } = useParams<{ post: string; isbn: string }>();
@@ -363,6 +363,6 @@ const BookInfoPage: FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BookInfoPage;

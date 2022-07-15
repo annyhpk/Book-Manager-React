@@ -1,4 +1,4 @@
-import React, { FC, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes, Navigate } from 'react-router';
 import Spinner from '../../components/Spinner';
 
@@ -7,7 +7,7 @@ const MainPage = React.lazy(() => import('../../page/MainPage'));
 const BookInfoPage = React.lazy(() => import('../../page/BookInfoPage'));
 const DarkModeToggle = React.lazy(() => import('../../components/DarkModeToggle'));
 
-const App: FC = () => {
+function App() {
   return (
     <Suspense fallback={<Spinner />}>
       <DarkModeToggle />
@@ -19,6 +19,6 @@ const App: FC = () => {
       </Routes>
     </Suspense>
   );
-};
+}
 
 export default App;

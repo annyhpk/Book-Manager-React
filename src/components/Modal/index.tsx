@@ -1,11 +1,11 @@
-import React, { FC, useCallback, memo, useRef } from 'react';
+import React, { useCallback, memo, useRef } from 'react';
 
 interface Props {
   children: React.ReactNode;
   onCloseModal: () => void;
 }
 
-const Modal: FC<Props> = ({ children, onCloseModal }: Props) => {
+function Modal({ children, onCloseModal }: Props) {
   // 스크롤 참조
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -72,6 +72,6 @@ const Modal: FC<Props> = ({ children, onCloseModal }: Props) => {
       </div>
     </div>
   );
-};
+}
 
 export default memo(Modal);

@@ -1,4 +1,4 @@
-import React, { useCallback, useState, FC, useMemo, useRef } from 'react';
+import React, { useCallback, useState, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { BookInfo } from '../../typings/resType';
 import { RootState } from '../../modules/reducers';
@@ -11,7 +11,7 @@ const Pagination = React.lazy(() => import('../../components/Pagination'));
 const MainBookList = React.lazy(() => import('../../components/MainBookList'));
 const SearchInput = React.lazy(() => import('../../components/SearchInput'));
 
-const MainPage: FC = () => {
+function MainPage() {
   const navigate = useNavigate();
   const { page } = useParams<{ page: string }>();
   const pageNum = useMemo(() => parseInt(page || '1'), [page]);
@@ -149,6 +149,6 @@ const MainPage: FC = () => {
       </dialog>
     </div>
   );
-};
+}
 
 export default MainPage;

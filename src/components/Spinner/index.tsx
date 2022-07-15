@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
 
-const Spinner: FC = () => {
+function Spinner() {
   return (
     <div className="flex justify-center text-center absolute w-screen top-1/4">
       <button
@@ -28,6 +28,6 @@ const Spinner: FC = () => {
       </button>
     </div>
   );
-};
+}
 
 export default Spinner;
